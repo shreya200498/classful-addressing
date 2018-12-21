@@ -1,0 +1,117 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+int main()
+{
+    int choice;
+    char add[20];
+    int num[5];
+    int sum,count,x,i,j,k,len,temp;
+    do{
+        printf("\nEnter the IP address\n");
+        scanf("%s",add);
+        len=strlen(add);
+        add[len]='.';
+        add[len+1]='\0';
+        i=0;
+        x=0;
+        while(i<len)
+        {
+            count=0;
+            for(j=i; add[j] != '.' ;j++)
+            {
+                count++;
+            }
+            sum=0;
+            temp=i+count-1;
+            for(k=0;k<count;k++)
+            {
+                if(k==0)
+                {
+                    sum=sum+((add[temp]-48)*1);
+                    temp--;
+                }
+                else if(k==1)
+                {
+                    sum=sum+((add[temp]-48)*10);
+                    temp--;
+                }
+                else
+                {
+                    sum=sum+((add[temp]-48)*100);
+                    temp--;
+                }
+            }
+            num[x]=sum;
+            x++;
+            i=i+count+1;
+        }
+        if((num[0]>=0 && num[0]<=127) && (num[1]>=0 && num[1]<=255) && (num[2]>=0 && num[2]<=255) && (num[3]>=0 && num[3]<=255))
+        {
+            printf("Given IP address is of class A.\n");
+        }
+        else if((num[0]>=0 && num[0]<=191) && (num[1]>=0 && num[1]<=255) && (num[2]>=0 && num[2]<=255) && (num[3]>=0 && num[3]<=255))
+        {
+            printf("Given IP address is of class B.\n");
+        }
+        else if((num[0]>=192 && num[0]<=223) && (num[1]>=0 && num[1]<=255) && (num[2]>=0 && num[2]<=255) && (num[3]>=0 && num[3]<=255))
+        {
+            printf("Given IP address is of class C.\n");
+        }
+        else if((num[0]>=224 && num[0]<=239) && (num[1]>=0 && num[1]<=255) && (num[2]>=0 && num[2]<=255) && (num[3]>=0 && num[3]<=255))
+        {
+            printf("Given IP address is of class D.\n");
+        }
+        else if((num[0]>=240 && num[0]<=255) && (num[1]>=0 && num[1]<=255) && (num[2]>=0 && num[2]<=255) && (num[3]>=0 && num[3]<=255))
+        {
+            printf("Given IP address is of class E.\n");
+        }
+        else
+        {
+            printf("Invalid IP address\n");
+        }
+        printf("\nEnter 1 to check another address and 0 to exit: \n");
+        scanf("%d",&choice);
+    } while(choice == 1);
+    return 0;
+}
+/*
+OUTPUT:
+Enter the IP address
+0.0.0.0
+Given IP address is of class A.
+
+Enter 1 to check another address and 0 to exit:
+1
+
+Enter the IP address
+130.150.144.160
+Given IP address is of class B.
+
+Enter 1 to check another address and 0 to exit:
+1
+
+Enter the IP address
+192.250.255.255
+Given IP address is of class C.
+
+Enter 1 to check another address and 0 to exit:
+1
+
+Enter the IP address
+239.255.255.255
+Given IP address is of class D.
+
+Enter 1 to check another address and 0 to exit:
+1
+
+Enter the IP address
+244.150.4.3
+Given IP address is of class E.
+
+Enter 1 to check another address and 0 to exit:
+0
+
+Process returned 0 (0x0)   execution time : 122.117 s
+Press any key to continue.
+*/
